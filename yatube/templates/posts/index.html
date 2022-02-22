@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %} 
+<html lang="ru">
+  <head>
+<title>{{ title }}</title>
+  </head>
+  <body>
+    <header>
+      {% include 'includes/header.html' %}
+    </header>
+    <main>
+      {% block content %}
+        <div class="container py-5">
+            <p>{{title}}</p>    
+            <h1>Последние обновления на сайте</h1>
+            {% for post in posts %}
+              <ul>
+                <li>
+                Автор: {{ post.author.get_full_name }}
+                </li>
+                <li>
+                Дата публикации: {{ post.pub_date|date:"d E Y" }}
+                </li>
+              </ul>      
+              <p>
+                {{ post.text }}
+              </p>
+              {% if post.group %}
+                <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+              {% endif %}
+              {% if not forloop.last %}<hr>{% endif %}
+            {% endfor %}
+        </div>
+        {% endblock %}
+    </main>
+    <footer class="border-top text-center py-3">
+        {% include 'includes/footer.html' %}    
+    </footer>
+  </body>
