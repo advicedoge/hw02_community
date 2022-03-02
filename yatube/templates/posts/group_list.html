@@ -1,35 +1,22 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
-<html lang="ru">
-  <head>    
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <header>
-      {% include 'includes/header.html' %}
-    </header>
-    <main>
-      {% block content %}
-        <div class="container py-5">
-          <p>{{title}}</p>
-          {% for post in posts %}
-              <ul>
+{% block title %}Верхнее название страницы сайта{% endblock %}
+{% block content %}
+    <div class="container py-5">
+        <h1>{{title}}</h1>
+        {% for post in posts %}
+            <ul>
                 <li>
-                Автор: {{ post.author.get_full_name }}
+                    Автор: {{ post.author.get_full_name }}
                 </li>
                 <li>
-                Дата публикации: {{ post.pub_date|date:"d E Y" }}
+                    Дата публикации: {{ post.pub_date|date:"d E Y" }}
                 </li>
-              </ul>      
-              <p>
+            </ul>
+            <p>
                 {{ post.text }}
-              </p>
-              {% if not forloop.last %}<hr>{% endif %}
-            {% endfor %} 
-        </div>
-      {% endblock %}
-    </main>       
-    <footer class="border-top text-center py-3">
-      {% include 'includes/footer.html' %} 
-    </footer>
-  </body>
+            </p>
+            {% if not forloop.last %}<hr>{% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

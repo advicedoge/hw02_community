@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Group(models.Model):
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.title
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=10, null=True, blank=True, unique=True)
@@ -26,6 +26,6 @@ class Post(models.Model):
         Group,
         blank=True,
         null=True,
-        on_delete=models.CASCADE,
-        related_name='group'
+        on_delete=models.SET_NULL,
+        related_name='posts'
     )
