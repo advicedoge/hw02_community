@@ -10,8 +10,7 @@ def index(request):
     template = 'posts/index.html'
     context = {
         'posts': posts,
-        'title': 'Yatube Главная страница',
-        'text': 'Это главная страница проекта Yatube'
+        'title': 'Главная страница'
     }
 
     return render(request, template, context)
@@ -19,7 +18,7 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = posts = group.posts.all().order_by('-pub_date')[:DISPLAY_LIMIT]
+    posts = group.posts.order_by('-pub_date')[:DISPLAY_LIMIT]
     context = {
         'group': group,
         'posts': posts,
