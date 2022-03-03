@@ -21,7 +21,6 @@ def group_posts(request, slug):
     posts = group.posts.order_by('-pub_date')[:DISPLAY_LIMIT]
     context = {
         'group': group,
-        'posts': posts,
-        'title': 'Страница сообщества Yatube',
+        'posts': posts
     }
     return render(request, 'posts/group_list.html', context)
